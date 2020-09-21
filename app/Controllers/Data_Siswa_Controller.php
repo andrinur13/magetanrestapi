@@ -128,11 +128,30 @@ class Data_Siswa_Controller extends ResourceController
         $id = $this->request->getRawInput();
         $id = $id['id'];
 
-        $dataSiswa = $this->modeldatasiswa->getDataSiswa($id);
 
-        return $this->respond([
-            'status' => 'success',
-            'data' => $dataSiswa
-        ]);
+        if(!$id) {
+            return $this->respond([
+                'status' => 'failed',
+                'messages' => 'provide an id'
+            ]);
+        } else {
+            $hasil = $this->modeldatasiswa->getDataSiswa($id);
+
+            if(!$hasil) {
+                return $this->respond([
+                    'status' => 'failed',
+                    'messages' => 'data not found'
+                ]);
+            } else {
+                // data ditemukan dan bisa mengedit
+
+                
+
+                return $this->respond([
+                    'status' => 'success',
+                    'data' => $hasil
+                ]);
+            }
+        }
     }
 }
