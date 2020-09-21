@@ -39,7 +39,8 @@ class Data_Siswa_Controller extends ResourceController
 
 
 
-    public function show() {
+    public function siswaid() {
+        // request dengan params;
         $id = $this->request->getVar('id');
 
         if(!$id) {

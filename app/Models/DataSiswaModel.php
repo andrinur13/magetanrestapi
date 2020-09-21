@@ -7,6 +7,7 @@ class DataSiswaModel extends Model
 {
     protected $table = 'data_siswa';
     protected $useTimestamps = true;
+    protected $primaryKey = 'id_data_siswa';
     protected $allowedFields = ['id_data_siswa', 'nisn', 'nik', 'nama', 'tgl_lahir', 'alamat', 'lulus'];
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
@@ -19,7 +20,7 @@ class DataSiswaModel extends Model
         if($id_data_siswa == false) {
             return $this->findAll();
         } else {
-            return $this->find(['id_data_siswa' == $id_data_siswa]);
+            return $this->find($id_data_siswa);
         }
     }
 
