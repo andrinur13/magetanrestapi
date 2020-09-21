@@ -43,6 +43,11 @@ class Data_Siswa_Controller extends ResourceController
         // request dengan params;
         $id = $this->request->getVar('id');
 
+        if($id == null) {
+            $id = $this->request->getRawInput();
+            $id = $id['id'];
+        }
+
         if(!$id) {
             return $this->respond([
                 'status' => 'failed',
@@ -115,5 +120,19 @@ class Data_Siswa_Controller extends ResourceController
                 'messages' => 'data failed to store'
             ]);
         }
+    }
+
+
+
+    public function editsiswa() {
+        $id = $this->request->getRawInput();
+        $id = $id['id'];
+
+        $dataSiswa = $this->modeldatasiswa->getDataSiswa($id);
+
+        return $this->respond([
+            'status' => 'success',
+            'data' => $dataSiswa
+        ]);
     }
 }
