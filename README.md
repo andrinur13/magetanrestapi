@@ -16,3 +16,6 @@ jangan lupa edit file .env sesuai kebutuhan
 `php spark db:seed`
 
 
+### jika ada error
+`composer install`
+
