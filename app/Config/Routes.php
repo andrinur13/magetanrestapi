@@ -35,7 +35,7 @@ $routes->get('/siswaid', 'Data_Siswa_Controller::siswaid');
 $routes->get('/siswa', 'Data_Siswa_Controller::index');
 $routes->post('/siswa', 'Data_Siswa_Controller::create');
 $routes->put('/siswa', 'Data_Siswa_Controller::editsiswa');
-$routes->delete('/siswa', 'Data_Siswa_Controller::delete');
+$routes->delete('/siswa', 'Data_Siswa_Controller::deleteSiswa');
 
 /**
  * --------------------------------------------------------------------

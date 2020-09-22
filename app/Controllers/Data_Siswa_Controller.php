@@ -176,58 +176,34 @@ class Data_Siswa_Controller extends ResourceController
 
 
 
-    public function delete($id = null)
+    public function deleteSiswa($id = null)
     {
-        $data_input = $this->request->getRawInput();
-        
-        if(!$data_input) {
-            return $this->respond([
-                'status' => 'failed',
-                'messages' => 'provide an id. your input has not req body'
-            ]);
+        if(!$id) {
+            // tampung siapa tau dari body
+            $datainput = $this->request->getRawInput();
+            $id = $datainput['id'];
         }
 
-        $id = $data_input['id'];
-
-        if($id == null) {
+        if(!$id) {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id!'
             ]);
         } else {
-            // jika ditemukan id
-            // request delete ke model
+            $cari = $this->modeldatasiswa->getDataSiswa($id);
 
-
-            $hapus = $this->modeldatasiswa->deleteDataSiswa($id);
-
-            $data = [
-                'status' => 'success',
-                'hapus' => $hapus
-            ];
-            
-            if($hapus) {
-                echo  'oke';
-            } else {
-                echo  'not ok';
-            }
-
-            // BUG HERE
-
-            die;
-
-
-            if($this->modeldatasiswa->deleteDataSiswa($id)) {
-                // jika berhasil delete
-                return $this->respondDeleted([
-                    'status' => 'success',
-                    'messages' => 'success deleted data with id ' . $id,
-                ]);
-            } else {
-                // jika gagal delete / tidak ditemukan id
+            if(!$cari) {
+                // id ga ada
                 return $this->respond([
                     'status' => 'failed',
-                    'messages' => 'failed delete data with id ' . $id
+                    'messages' => 'id not found ' . $id
+                ]);
+            } else {
+                // id ditemukan
+                $this->modeldatasiswa->delete($id);
+                return $this->respondDeleted([
+                    'status' => 'success',
+                    'messages' => 'success deleted with id ' . $id
                 ]);
             }
         }
