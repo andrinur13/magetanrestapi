@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use CodeIgniter\Model;
 
 class DataSiswaModel extends Model
@@ -17,7 +18,7 @@ class DataSiswaModel extends Model
     // get data siswa
     public function getDataSiswa($id_data_siswa = false)
     {
-        if($id_data_siswa == false) {
+        if ($id_data_siswa == false) {
             return $this->findAll();
         } else {
             return $this->find($id_data_siswa);
@@ -25,8 +26,9 @@ class DataSiswaModel extends Model
     }
 
 
-    public function storeDataSiswa($data) {
-        if($this->insert($data)) {
+    public function storeDataSiswa($data)
+    {
+        if ($this->insert($data)) {
             return true;
         } else {
             return false;
@@ -34,8 +36,9 @@ class DataSiswaModel extends Model
     }
 
 
-    public function updateDataSiswa($data, $id) {
-        if($this->update($id, $data)) {
+    public function updateDataSiswa($data, $id)
+    {
+        if ($this->update($id, $data)) {
             return true;
         } else {
             return false;
@@ -44,11 +47,8 @@ class DataSiswaModel extends Model
 
 
 
-    public function deleteDataSiswa($id) {
-        if($this->delete($id)) {
-            return true;
-        } else {
-            return false;
-        }
+    public function deleteDataSiswa($id)
+    {
+        return $this->delete($id);
     }
 }

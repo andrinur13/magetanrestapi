@@ -197,6 +197,26 @@ class Data_Siswa_Controller extends ResourceController
         } else {
             // jika ditemukan id
             // request delete ke model
+
+
+            $hapus = $this->modeldatasiswa->deleteDataSiswa($id);
+
+            $data = [
+                'status' => 'success',
+                'hapus' => $hapus
+            ];
+            
+            if($hapus) {
+                echo  'oke';
+            } else {
+                echo  'not ok';
+            }
+
+            // BUG HERE
+
+            die;
+
+
             if($this->modeldatasiswa->deleteDataSiswa($id)) {
                 // jika berhasil delete
                 return $this->respondDeleted([
