@@ -41,4 +41,14 @@ class DataSiswaModel extends Model
             return false;
         }
     }
+
+
+
+    public function deleteDataSiswa($id) {
+        if($this->delete($id)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
