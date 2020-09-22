@@ -32,4 +32,13 @@ class DataSiswaModel extends Model
             return false;
         }
     }
+
+
+    public function updateDataSiswa($data, $id) {
+        if($this->update($id, $data)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

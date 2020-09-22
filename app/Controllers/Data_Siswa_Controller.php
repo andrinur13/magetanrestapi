@@ -144,18 +144,26 @@ class Data_Siswa_Controller extends ResourceController
             } else {
                 // data ditemukan
                 $datahasiledit = [
-                    'nisn' => $data_input['nik'] ? $data_input['nik']: $datayangmaudiedit['nik'],
-                    'nik' => $data_input['nik'] ? $data_input['nik'] : $datayangmaudiedit['nik'],
-                    'nama' => $data_input['nama'] ? $data_input['nama'] : $datayangmaudiedit['nama'],
-                    'tgl_lahir' => $data_input['tgl_lahir'] ? $data_input['tgl_lahir'] : $datayangmaudiedit['tgl_lahir'],
-                    'alamat' => $data_input['alamat'] ? $data_input['alamat'] : $datayangmaudiedit['alamat'],
-                    'lulus' => $data_input['lulus'] ? $data_input['lulus'] : $datayangmaudiedit['lulus'],
+                    'nisn' => isset($data_input['nik']) ? $data_input['nik']: $datayangmaudiedit['nik'],
+                    'nik' => isset($data_input['nik']) ? $data_input['nik'] : $datayangmaudiedit['nik'],
+                    'nama' => isset($data_input['nama']) ? $data_input['nama'] : $datayangmaudiedit['nama'],
+                    'tgl_lahir' => isset($data_input['tgl_lahir']) ? $data_input['tgl_lahir'] : $datayangmaudiedit['tgl_lahir'],
+                    'alamat' => isset($data_input['alamat']) ? $data_input['alamat'] : $datayangmaudiedit['alamat'],
+                    'lulus' => isset($data_input['lulus']) ? $data_input['lulus'] : $datayangmaudiedit['lulus'],
                 ];
 
-                return $this->respond([
-                    'status' => true,
-                    'data' => $datahasiledit
-                ]);
+                if($this->modeldatasiswa->updateDataSiswa($datahasiledit, $id)) {
+                    return $this->respondUpdated([
+                        'status' => 'success',
+                        'messages' => 'success update data with id' . $id,
+                        'data' => $datahasiledit
+                    ]);
+                } else {
+                    return $this->respond([
+                        'status' => 'failed',
+                        'messages' => 'failed update data with id ' . $id
+                    ]);
+                }
             }
         } else {
             // tidak ada data yang masuk dari request
