@@ -39,16 +39,17 @@ class Data_Siswa_Controller extends ResourceController
 
 
 
-    public function siswaid() {
+    public function siswaid()
+    {
         // request dengan params;
         $id = $this->request->getVar('id');
 
-        if($id == null) {
+        if ($id == null) {
             $id = $this->request->getRawInput();
             $id = $id['id'];
         }
 
-        if(!$id) {
+        if (!$id) {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
@@ -56,7 +57,7 @@ class Data_Siswa_Controller extends ResourceController
         } else {
             $hasil = $this->modeldatasiswa->getDataSiswa($id);
 
-            if(!$hasil) {
+            if (!$hasil) {
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => $id . ' not found'
@@ -77,14 +78,14 @@ class Data_Siswa_Controller extends ResourceController
         helper('form');
 
         $rules = [
-			'nisn' => 'required|min_length[1]|max_length[100]',
+            'nisn' => 'required|min_length[1]|max_length[100]',
             'nik' => 'required|min_length[1]|max_length[100]',
             'nama' => 'required',
             'tgl_lahir' => 'valid_date',
-			'alamat' => 'required'
+            'alamat' => 'required'
         ];
 
-        if(! $this->validate($rules)) {
+        if (!$this->validate($rules)) {
             $validation = \Config\Services::validation();
             return $this->respond([
                 'errors' => $validation->getErrors()
@@ -93,7 +94,7 @@ class Data_Siswa_Controller extends ResourceController
 
         // status kelulusan
         $lulus = $this->request->getVar('lulus');
-        if((!$lulus) && $lulus != 1) {
+        if ((!$lulus) && $lulus != 1) {
             $lulus = 0;
         } else {
             $lulus = 1;
@@ -110,7 +111,7 @@ class Data_Siswa_Controller extends ResourceController
         ];
 
         // insert ke database;
-        if($this->modeldatasiswa->storeDataSiswa($dataInputan)) {
+        if ($this->modeldatasiswa->storeDataSiswa($dataInputan)) {
             return $this->respondCreated([
                 'status' => 'Berhasil'
             ]);
@@ -124,34 +125,44 @@ class Data_Siswa_Controller extends ResourceController
 
 
 
-    public function editsiswa() {
-        $id = $this->request->getRawInput();
-        $id = $id['id'];
+    public function editsiswa()
+    {
+        $data_input = $this->request->getRawInput();
 
+        if ($data_input) {
+            // ada data yang masuk dari request
+            $id = $data_input['id'];
 
-        if(!$id) {
-            return $this->respond([
-                'status' => 'failed',
-                'messages' => 'provide an id'
-            ]);
-        } else {
-            $hasil = $this->modeldatasiswa->getDataSiswa($id);
+            $datayangmaudiedit = $this->modeldatasiswa->getDataSiswa($id);
 
-            if(!$hasil) {
+            if (!$datayangmaudiedit) {
+                // data tidak ditemukan
                 return $this->respond([
                     'status' => 'failed',
-                    'messages' => 'data not found'
+                    'messages' => 'id not found'
                 ]);
             } else {
-                // data ditemukan dan bisa mengedit
-
-                
+                // data ditemukan
+                $datahasiledit = [
+                    'nisn' => $data_input['nik'] ? $data_input['nik']: $datayangmaudiedit['nik'],
+                    'nik' => $data_input['nik'] ? $data_input['nik'] : $datayangmaudiedit['nik'],
+                    'nama' => $data_input['nama'] ? $data_input['nama'] : $datayangmaudiedit['nama'],
+                    'tgl_lahir' => $data_input['tgl_lahir'] ? $data_input['tgl_lahir'] : $datayangmaudiedit['tgl_lahir'],
+                    'alamat' => $data_input['alamat'] ? $data_input['alamat'] : $datayangmaudiedit['alamat'],
+                    'lulus' => $data_input['lulus'] ? $data_input['lulus'] : $datayangmaudiedit['lulus'],
+                ];
 
                 return $this->respond([
-                    'status' => 'success',
-                    'data' => $hasil
+                    'status' => true,
+                    'data' => $datahasiledit
                 ]);
             }
+        } else {
+            // tidak ada data yang masuk dari request
+            return $this->respond([
+                'status' => 'failed',
+                'messages' => 'provide an id!'
+            ]);
         }
     }
 }
