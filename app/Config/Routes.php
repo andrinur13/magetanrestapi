@@ -31,6 +31,9 @@ $routes->setAutoRoute(true);
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
+
+
+// data siswa
 $routes->get('/siswaid', 'Data_Siswa_Controller::siswaid');
 $routes->get('/siswa', 'Data_Siswa_Controller::index');
 $routes->post('/siswa', 'Data_Siswa_Controller::create');
