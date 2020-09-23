@@ -88,6 +88,7 @@ class Data_Siswa_Controller extends ResourceController
         if (!$this->validate($rules)) {
             $validation = \Config\Services::validation();
             return $this->respond([
+                'status' => 'failed',
                 'errors' => $validation->getErrors()
             ]);
         }
