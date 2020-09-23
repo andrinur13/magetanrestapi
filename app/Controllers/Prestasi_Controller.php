@@ -35,7 +35,11 @@ class Prestasi_Controller extends ResourceController
 
 
 
-    public function prestasiid($id){
+    public function prestasiid(){
+
+
+        $id = $this->request->getVar('id');
+
         if(!$id) {
             // cek apabila dikirim lewat body
             $datainput = $this->request->getRawInput();
@@ -130,6 +134,7 @@ class Prestasi_Controller extends ResourceController
             } else {
                 // data ditemukan
                 // bisa diedit
+                var_dump($cari);
             }
 
         } else {

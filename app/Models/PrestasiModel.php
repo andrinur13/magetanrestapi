@@ -19,7 +19,7 @@ class PrestasiModel extends Model
     public function getPrestasi($id = false)
     {
 
-        if (!$id == false) {
+        if ($id == false) {
             // jika id tidak ada
             // maka kembalikan semua data prestasi
             return $this->findAll();
