@@ -37,6 +37,12 @@ $routes->post('/siswa', 'Data_Siswa_Controller::create');
 $routes->put('/siswa', 'Data_Siswa_Controller::editsiswa');
 $routes->delete('/siswa', 'Data_Siswa_Controller::deleteSiswa');
 
+
+// prestasi
+$routes->get('/prestasi', 'Prestasi_Controller::index');
+$routes->get('/prestasiid', 'Prestasi_Controller::prestasiid');
+$routes->post('/prestasi', 'Prestasi_Controller::create');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing
