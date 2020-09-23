@@ -48,6 +48,14 @@ $routes->post('/prestasi', 'Prestasi_Controller::create');
 $routes->put('/prestasi', 'Prestasi_Controller::editPrestasi');
 $routes->delete('/prestasi', 'Prestasi_Controller::deletePrestasi');
 
+
+// pelanggaran
+$routes->get('/pelanggaran', 'Pelanggaran_Controller::index');
+$routes->get('/pelanggaranid', 'Pelanggaran_Controller::pelanggaranid');
+$routes->post('/pelanggaran', 'Pelanggaran_Controller::createPelanggaran');
+$routes->put('/pelanggaran', 'Pelanggaran_Controller::editPelanggaran');
+$routes->delete('/pelanggaran', 'Pelanggaran_Controller::deletePelanggaran');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

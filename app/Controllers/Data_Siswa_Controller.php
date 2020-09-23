@@ -45,8 +45,8 @@ class Data_Siswa_Controller extends ResourceController
         $id = $this->request->getVar('id');
 
         if ($id == null) {
-            $id = $this->request->getRawInput();
-            $id = $id['id'];
+            $inputan = $this->request->getRawInput();
+            $id = $inputan['id'];
         }
 
         if (!$id) {
