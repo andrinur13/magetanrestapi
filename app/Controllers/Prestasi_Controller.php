@@ -20,7 +20,7 @@ class Prestasi_Controller extends ResourceController
     public function index()
     {
         $dataprestasi = $this->modelprestasi->getPrestasi();
-        if($dataprestasi) {
+        if ($dataprestasi) {
             return $this->respond([
                 'status' => 'success',
                 'data' => $dataprestasi
@@ -35,19 +35,20 @@ class Prestasi_Controller extends ResourceController
 
 
 
-    public function prestasiid(){
+    public function prestasiid()
+    {
 
 
         $id = $this->request->getVar('id');
 
-        if(!$id) {
+        if (!$id) {
             // cek apabila dikirim lewat body
             $datainput = $this->request->getRawInput();
             $id = $datainput['id'];
         }
 
 
-        if(!$id) {
+        if (!$id) {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
@@ -55,7 +56,7 @@ class Prestasi_Controller extends ResourceController
         } else {
             $cari = $this->modelprestasi->getPrestasi($id);
 
-            if(!$cari) {
+            if (!$cari) {
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id not found!'
@@ -84,7 +85,7 @@ class Prestasi_Controller extends ResourceController
         ];
 
 
-        if(!$this->validate($rules)) {
+        if (!$this->validate($rules)) {
             // kembalikan pesan error sebagai respon validasi
             $validasi = \Config\Services::validation();
             return $this->respond([
@@ -101,7 +102,7 @@ class Prestasi_Controller extends ResourceController
             'hasil' => $this->request->getVar('hasil')
         ];
 
-        if($this->modelprestasi->storePrestasi($data)) {
+        if ($this->modelprestasi->storePrestasi($data)) {
             return $this->respondCreated([
                 'status' => 'success',
                 'messages' => 'success added data'
@@ -120,13 +121,13 @@ class Prestasi_Controller extends ResourceController
     {
         $datainput = $this->request->getRawInput();
 
-        if($datainput) {
+        if ($datainput) {
             // ada data input yang masuk
             $id = $datainput['id'];
 
             $cari = $this->modelprestasi->getPrestasi($id);
-            
-            if(!$cari) {
+
+            if (!$cari) {
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found'
@@ -134,14 +135,66 @@ class Prestasi_Controller extends ResourceController
             } else {
                 // data ditemukan
                 // bisa diedit
-                var_dump($cari);
-            }
+                $dataupdate = [
+                    'id_data_siswa' => isset($datainput['id_data_siswa']) ? $datainput['id_data_siswa'] : $cari['id_data_siswa'],
+                    'tingkat' => isset($datainput['tingkat']) ? $datainput['tingkat'] : $cari['tingkat'],
+                    'penyelenggara' => isset($datainput['penyelenggara']) ? $datainput['penyelenggara'] : $cari['penyelenggara'],
+                    'nama_kegiatan' => isset($datainput['nama_kegiatan']) ? $datainput['nama_kegiatan'] : $cari['nama_kegiatan'],
+                    'hasil' => isset($datainput['hasil']) ? $datainput['hasil'] : $cari['hasil']
+                ];
 
+                $this->modelprestasi->updatePrestasi($dataupdate, $id);
+
+                return $this->respondUpdated([
+                    'status' => 'success',
+                    'messages' => 'id ' . $id . ' was updated',
+                    'data' => $dataupdate
+                ]);
+            }
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'id' => 'provide an id'
             ]);
+        }
+    }
+
+
+    public function deletePrestasi()
+    {
+        $datainput = $this->request->getRawInput();
+
+        if (!$datainput) {
+            return $this->respond([
+                'status' => 'failed',
+                'provide an id'
+            ]);
+        } else {
+            if (isset($datainput['id'])) {
+                $id = $datainput['id'];
+
+                // delete db with id
+                $cari = $this->modelprestasi->getPrestasi($id);
+
+                if (!$cari) {
+                    return $this->respond([
+                        'status' => 'failed',
+                        'messages' => 'id ' . $id . ' not found'
+                    ]);
+                } else {
+                    // data ada
+                    $this->modelprestasi->deletePrestasi($id);
+                    return $this->respondDeleted([
+                        'status' => 'success',
+                        'messages' => 'success deleted data with id ' . $id
+                    ]);
+                }
+            } else {
+                return $this->respond([
+                    'status' => 'failed',
+                    'messages' => 'provide an id'
+                ]);
+            }
         }
     }
 }

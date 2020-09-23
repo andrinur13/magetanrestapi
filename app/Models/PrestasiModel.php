@@ -11,10 +11,7 @@ class PrestasiModel extends Model
     protected $useTimestamps = true;
     protected $primaryKey = 'id_prestasi';
     protected $allowedFields = ['id_data_siswa', 'tingkat', 'penyelenggara', 'nama_kegiatan', 'hasil'];
-    protected $createdField  = 'created_at';
-    protected $updatedField  = 'updated_at';
-    protected $deletedField  = 'deleted_at';
-
+    
 
     public function getPrestasi($id = false)
     {
@@ -33,5 +30,15 @@ class PrestasiModel extends Model
     public function storePrestasi($data)
     {
         return $this->insert($data);
+    }
+
+
+    public function updatePrestasi($data, $id) {
+        $this->update($id, $data);
+    }
+
+
+    public function deletePrestasi($id) {
+        $this->delete($id);
     }
 }
