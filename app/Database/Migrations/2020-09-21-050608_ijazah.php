@@ -24,12 +24,15 @@ class Ijazah extends Migration
 			],
 			'created_at' => [
 				'type' => 'DATETIME',
+				'null' => TRUE
 			],
 			'updated_at' => [
-				'type' => 'DATETIME'
+				'type' => 'DATETIME',
+				'null' => TRUE
 			],
 			'deleted_at' => [
-				'type' => 'DATETIME'
+				'type' => 'DATETIME',
+				'null' => TRUE
 			]
 		]);
 		$this->forge->addKey('id_ijazah', true);
