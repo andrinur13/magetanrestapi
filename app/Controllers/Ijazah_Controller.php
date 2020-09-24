@@ -2,83 +2,80 @@
 
 namespace App\Controllers;
 
-use App\Models\PelanggaranModel;
+use App\Models\IjazahModel;
 use CodeIgniter\RESTful\ResourceController;
 
-class Pelanggaran_Controller extends ResourceController
+class Ijazah_Controller extends ResourceController
 {
-
-    protected $format = 'json';
-    protected $modelpelanggaran;
+    protected $modelijazah;
 
     public function __construct()
     {
-        $this->modelpelanggaran = new PelanggaranModel();
+        $this->modelijazah = new IjazahModel();
     }
 
 
     public function index()
     {
-        $cari = $this->modelpelanggaran->getPelanggaran();
+        $cari = $this->modelijazah->getIjazah();
 
-        if ($cari) {
+        if ($cari == null) {
             return $this->respond([
-                'status' => 'success',
-                'data' => $cari
+                'status' => 'failed',
+                'messages' => 'failed get data ijazah'
             ]);
         } else {
             return $this->respond([
-                'status' => 'failed',
-                'messages' => 'failed to get pelanggaran data'
+                'status' => 'success',
+                'data' => $cari
             ]);
         }
     }
 
 
 
-    public function pelanggaranid()
+    public function ijazahid()
     {
+        // request dengan params;
         $id = $this->request->getVar('id');
 
         if ($id == null) {
-            $datainput = $this->request->getRawInput();
-            $id = $datainput['id'];
+            $inputan = $this->request->getRawInput();
+            if (isset($inputan['id'])) {
+                $id = $inputan['id'];
+            }
         }
-
 
         if (!$id) {
             return $this->respond([
                 'status' => 'failed',
-                'messages' => 'provide an id!'
+                'messages' => 'provide an id'
             ]);
         } else {
-            $cari = $this->modelpelanggaran->getPelanggaran($id);
+            $hasil = $this->modelijazah->getIjazah($id);
 
-            if ($cari) {
+            if (!$hasil) {
                 return $this->respond([
-                    'status' => 'success',
-                    'data' => $cari
+                    'status' => 'failed',
+                    'messages' => $id . ' not found'
                 ]);
             } else {
                 return $this->respond([
-                    'status' => 'failed',
-                    'messages' => 'id ' . $id . ' not found!'
+                    'status' => 'success',
+                    'data' => $hasil
                 ]);
             }
         }
     }
 
 
-
-    public function createPelanggaran()
+    public function createIjazah()
     {
         helper('form');
 
         $rules = [
             'id_data_siswa' => 'required',
-            'jenis' => 'required|in_list[0, 1, 2, 3]',
-            'nama_pelanggaran' => 'required',
-            'hukuman' => 'required',
+            'link_ijazah' => 'required'
         ];
 
         if (!$this->validate($rules)) {
@@ -92,15 +89,13 @@ class Pelanggaran_Controller extends ResourceController
         // tampung data inputan
         $datainputan = [
             'id_data_siswa' => $this->request->getVar('id_data_siswa'),
-            'jenis' => $this->request->getVar('jenis'),
-            'nama_pelanggaran' => $this->request->getVar('nama_pelanggaran'),
-            'hukuman' => $this->request->getVar('hukuman')
+            'link_ijazah' => $this->request->getVar('link_ijazah'),
         ];
 
-        if ($this->modelpelanggaran->storePelanggaran($datainputan)) {
+        if ($this->modelijazah->storeIjazah($datainputan)) {
             return $this->respondCreated([
                 'status' => 'success',
-                'messages' => 'success add pelanggaran data'
+                'messages' => 'success add data'
             ]);
         } else {
             return $this->respond([
@@ -111,14 +106,13 @@ class Pelanggaran_Controller extends ResourceController
     }
 
 
-
-    public function editPelanggaran()
+    public function editIjazah()
     {
         $datainput = $this->request->getRawInput();
         if (isset($datainput['id'])) {
             $id = $datainput['id'];
 
-            $cari = $this->modelpelanggaran->getPelanggaran($id);
+            $cari = $this->modelijazah->getIjazah($id);
 
             if ($cari == null) {
                 return $this->respond([
@@ -130,12 +124,10 @@ class Pelanggaran_Controller extends ResourceController
 
                 $datahasiledit = [
                     'id_data_siswa' => isset($datainput['id_data_siswa']) ? $datainput['id_data_siswa'] : $cari['id_data_siswa'],
-                    'jenis' => isset($datainput['jenis']) ? $datainput['jenis'] : $cari['jenis'],
-                    'nama_pelanggaran' => isset($datainput['nama_pelanggaran']) ? $datainput['nama_pelanggaran'] : $cari['nama_pelanggaran'],
-                    'hukuman' => isset($datainput['hukuman']) ? $datainput['hukuman'] : $cari['hukuman']
+                    'link_ijazah' => isset($datainput['link_ijazah']) ? $datainput['link_ijazah'] : $cari['link_ijazah'],
                 ];
 
-                if ($this->modelpelanggaran->editPelanggaran($datahasiledit, $id)) {
+                if ($this->modelijazah->editIjazah($datahasiledit, $id)) {
                     return $this->respondUpdated([
                         'status' => 'success',
                         'messages' => 'success update data'
@@ -156,13 +148,13 @@ class Pelanggaran_Controller extends ResourceController
     }
 
 
-    public function deletePelanggaran()
+    public function deleteIjazah()
     {
         $datainput = $this->request->getRawInput();
         if(isset($datainput['id'])) {
             $id = $datainput['id'];
 
-            $cari = $this->modelpelanggaran->getPelanggaran($id);
+            $cari = $this->modelijazah->getIjazah($id);
 
             if($cari == null) {
                 return $this->respond([
@@ -171,7 +163,7 @@ class Pelanggaran_Controller extends ResourceController
                 ]);
             } else {
                 // delete data with id
-                $this->modelpelanggaran->deletePelanggaran($id);
+                $this->modelijazah->deleteIjazah($id);
                 return $this->respondDeleted([
                     'status' => 'success',
                     'messages' => 'success delete data with id ' . $id
@@ -185,4 +177,5 @@ class Pelanggaran_Controller extends ResourceController
             ]);
         }
     }
+    
 }

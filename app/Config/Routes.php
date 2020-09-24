@@ -56,6 +56,14 @@ $routes->post('/pelanggaran', 'Pelanggaran_Controller::createPelanggaran');
 $routes->put('/pelanggaran', 'Pelanggaran_Controller::editPelanggaran');
 $routes->delete('/pelanggaran', 'Pelanggaran_Controller::deletePelanggaran');
 
+
+// ijazah
+$routes->get('/ijazah', 'Ijazah_Controller::index');
+$routes->get('/ijazahid', 'Ijazah_Controller::ijazahid');
+$routes->post('/ijazah', 'Ijazah_Controller::createIjazah');
+$routes->put('/ijazah', 'Ijazah_Controller::editIjazah');
+$routes->delete('/ijazah', 'Ijazah_Controller::deleteIjazah');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

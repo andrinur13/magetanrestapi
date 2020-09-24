@@ -7,6 +7,11 @@ use CodeIgniter\Model;
 class IjazahModel extends Model
 {
 
+    protected $table = 'ijazah';
+    protected $useTimestamps = true;
+    protected $primaryKey = 'id_ijazah';
+    protected $allowedFields = ['id_data_siswa', 'link_ijazah'];
+
     public function getIjazah($id = false)
     {
         if($id == false) {
@@ -16,9 +21,9 @@ class IjazahModel extends Model
         }
     }
 
-    
 
-    public function createIjazah($data)
+
+    public function storeIjazah($data)
     {
         return $this->insert($data);
     }
@@ -26,7 +31,7 @@ class IjazahModel extends Model
 
 
 
-    public function updateIjazah($data, $id)
+    public function editIjazah($data, $id)
     {
         return $this->update($id, $data);
     }
