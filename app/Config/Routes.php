@@ -64,6 +64,14 @@ $routes->post('/ijazah', 'Ijazah_Controller::createIjazah');
 $routes->put('/ijazah', 'Ijazah_Controller::editIjazah');
 $routes->delete('/ijazah', 'Ijazah_Controller::deleteIjazah');
 
+
+// user
+$routes->get('/user', 'User_Controller::index');
+$routes->get('/userid', 'User_Controller::userid');
+$routes->post('/user', 'User_Controller::createUser');
+$routes->put('/user', 'User_Controller::editUser');
+$routes->delete('/user', 'User_Controller::deleteUser');
+
 /**
  * --------------------------------------------------------------------
  * Additional Routing

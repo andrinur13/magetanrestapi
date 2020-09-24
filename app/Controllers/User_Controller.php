@@ -91,11 +91,14 @@ class User_Controller extends ResourceController
 
         // tampung data inputan
         $datainputan = [
-            'id_data_siswa' => $this->request->getVar('id_data_siswa'),
-            'link_ijazah' => $this->request->getVar('link_ijazah'),
+            'id_user_type' => $this->request->getPost('id_user_type'),
+            'username' => $this->request->getPost('username'),
+            'name' => $this->request->getPost('name'),
+            'email' => $this->request->getPost('email'),
+            'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)
         ];
 
-        if ($this->modeluser->storeIjazah($datainputan)) {
+        if ($this->modeluser->storeUser($datainputan)) {
             return $this->respondCreated([
                 'status' => 'success',
                 'messages' => 'success add data'
@@ -109,13 +112,13 @@ class User_Controller extends ResourceController
     }
 
 
-    public function editIjazah()
+    public function editUser()
     {
         $datainput = $this->request->getRawInput();
         if (isset($datainput['id'])) {
             $id = $datainput['id'];
 
-            $cari = $this->modeluser->getIjazah($id);
+            $cari = $this->modeluser->getUser($id);
 
             if ($cari == null) {
                 return $this->respond([
@@ -126,11 +129,15 @@ class User_Controller extends ResourceController
                 // jika data ditemukan
 
                 $datahasiledit = [
-                    'id_data_siswa' => isset($datainput['id_data_siswa']) ? $datainput['id_data_siswa'] : $cari['id_data_siswa'],
-                    'link_ijazah' => isset($datainput['link_ijazah']) ? $datainput['link_ijazah'] : $cari['link_ijazah'],
+                    'id_user_type' => isset($datainput['id_user_type']) ? $datainput['id_user_type'] : $cari['id_user_type'],
+                    'username' => isset($datainput['username']) ? $datainput['username'] : $cari['username'],
+                    'name' => isset($datainput['name']) ? $datainput['name'] : $cari['name'],
+                    'email' => isset($datainput['email']) ? $datainput['email'] : $cari['email'],
+                    'password' => isset($datainput['password']) ? $datainput['password'] : $cari['password'],
+
                 ];
 
-                if ($this->modeluser->editIjazah($datahasiledit, $id)) {
+                if ($this->modeluser->editUser($datahasiledit, $id)) {
                     return $this->respondUpdated([
                         'status' => 'success',
                         'messages' => 'success update data'
@@ -151,13 +158,13 @@ class User_Controller extends ResourceController
     }
 
 
-    public function deleteIjazah()
+    public function deleteUser()
     {
         $datainput = $this->request->getRawInput();
         if(isset($datainput['id'])) {
             $id = $datainput['id'];
 
-            $cari = $this->modeluser->getIjazah($id);
+            $cari = $this->modeluser->getUser($id);
 
             if($cari == null) {
                 return $this->respond([
@@ -166,7 +173,7 @@ class User_Controller extends ResourceController
                 ]);
             } else {
                 // delete data with id
-                $this->modeluser->deleteIjazah($id);
+                $this->modeluser->deleteUser($id);
                 return $this->respondDeleted([
                     'status' => 'success',
                     'messages' => 'success delete data with id ' . $id
