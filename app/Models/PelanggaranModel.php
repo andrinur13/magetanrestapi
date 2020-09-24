@@ -11,6 +11,8 @@ class PelanggaranModel extends Model
     protected $useTimestamps = true;
     protected $primaryKey = 'id_pelanggaran';
     protected $allowedFields = ['id_data_siswa', 'jenis', 'nama_pelanggaran', 'hukuman'];
+    protected $useSoftDeletes = true;
+
 
 
     public function getPelanggaran($id = null)

@@ -11,6 +11,8 @@ class PrestasiModel extends Model
     protected $useTimestamps = true;
     protected $primaryKey = 'id_prestasi';
     protected $allowedFields = ['id_data_siswa', 'tingkat', 'penyelenggara', 'nama_kegiatan', 'hasil'];
+    protected $useSoftDeletes = true;
+
     
 
     public function getPrestasi($id = false)

@@ -11,6 +11,8 @@ class IjazahModel extends Model
     protected $useTimestamps = true;
     protected $primaryKey = 'id_ijazah';
     protected $allowedFields = ['id_data_siswa', 'link_ijazah'];
+    protected $useSoftDeletes = true;
+
 
     public function getIjazah($id = false)
     {
