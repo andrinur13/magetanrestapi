@@ -40,8 +40,10 @@ class Autoload extends AutoloadConfig
 	 * @var array
 	 */
 	public $psr4 = [
+		'App' => APPPATH,
 		APP_NAMESPACE => APPPATH, // For custom app namespace
 		'Config'      => APPPATH . 'Config',
+		'Firebase' => APPPATH . 'ThirdParty/Firebase'
 	];
 
 	/**

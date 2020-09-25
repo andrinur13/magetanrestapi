@@ -10,7 +10,7 @@ class UserModel extends Model
     protected $table = 'user';
     protected $useTimestamps = true;
     protected $primaryKey = 'id_user';
-    protected $allowedFields = ['id_user_type', 'name', 'email', 'password'];
+    protected $allowedFields = ['id_user_type', 'username', 'name', 'email', 'password'];
     protected $useSoftDeletes = true;
 
     public function getUser($id = null)
@@ -29,11 +29,7 @@ class UserModel extends Model
 
     public function editUser($data, $id)
     {
-        if($this->update($id, $data)) {
-            return true;
-        } else {
-            return false;
-        }
+        $this->update($id, $data);
     }
 
     public function deleteUser($id)
