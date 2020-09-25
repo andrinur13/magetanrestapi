@@ -43,7 +43,7 @@ class Autoload extends AutoloadConfig
 		'App' => APPPATH,
 		APP_NAMESPACE => APPPATH, // For custom app namespace
 		'Config'      => APPPATH . 'Config',
-		'Firebase' => APPPATH . 'ThirdParty/Firebase'
+		'Firebase' => APPPATH . 'ThirdParty/Firebase',
 	];
 
 	/**
