@@ -73,7 +73,7 @@ $routes->put('/user', 'User_Controller::editUser');
 $routes->delete('/user', 'User_Controller::deleteUser');
 $routes->post('/login', 'User_Controller::login');
 
-$routes->get('/testing', 'Testing_Controller:index');
+$routes->get('/testing', 'Testing_Controller::index');
 
 /**
  * --------------------------------------------------------------------
