@@ -4,8 +4,7 @@ namespace App\Controllers;
 
 use App\Models\UserModel;
 use CodeIgniter\RESTful\ResourceController;
-use Firebase\JWT;
-use Firebase\JWT\JWT as JWTJWT;
+use Firebase\JWT\JWT;
 
 class User_Controller extends ResourceController
 {
@@ -220,10 +219,10 @@ class User_Controller extends ResourceController
 
     public function login()
     {
-        $email      = $this->request->getPost('username');
+        $username      = $this->request->getPost('username');
         $password   = $this->request->getPost('password');
  
-        $cek_login = $this->modeluser->cek_login($email);
+        $cek_login = $this->modeluser->cek_login($username);
 
 
         // var_dump($cek_login);
@@ -254,13 +253,13 @@ class User_Controller extends ResourceController
                 )
             );
  
-            $token = JWTJWT::encode($token, $secret_key);
+            $token = JWT::encode($token, $secret_key);
  
             $output = [
                 'status' => 200,
                 'message' => 'Berhasil login',
                 "token" => $token,
-                "email" => $email,
+                "username" => $username,
                 "expireAt" => $expire_claim
             ];
             return $this->respond($output, 200);
