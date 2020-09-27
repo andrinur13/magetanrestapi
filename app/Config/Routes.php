@@ -68,6 +68,7 @@ $routes->delete('/ijazah', 'Ijazah_Controller::deleteIjazah');
 // user
 $routes->get('/user', 'User_Controller::index');
 $routes->get('/userid', 'User_Controller::userid');
+$routes->post('/username', 'User_Controller::username');
 $routes->post('/user', 'User_Controller::createUser');
 $routes->put('/user', 'User_Controller::editUser');
 $routes->delete('/user', 'User_Controller::deleteUser');

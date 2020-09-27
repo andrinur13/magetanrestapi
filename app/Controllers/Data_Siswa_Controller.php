@@ -72,7 +72,7 @@ class Data_Siswa_Controller extends ResourceController
     }
 
 
-
+    
     public function create()
     {
         helper('form');

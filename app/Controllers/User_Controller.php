@@ -13,6 +13,7 @@ class User_Controller extends ResourceController
     public function __construct()
     {
         $this->modeluser = new UserModel();
+
     }
 
 
@@ -64,6 +65,34 @@ class User_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'success',
                     'data' => $hasil
+                ]);
+            }
+        }
+    }
+
+
+    public function username()
+    {
+        $username = $this->request->getVar('username');
+
+        if (!isset($username)) {
+            return $this->respond([
+                'status' => 'failed',
+                'messages' => 'provide an username'
+            ]);
+        } else {
+            // jika ada inputan username
+            $cari = $this->modeluser->getUsername($username);
+
+            if ($cari == null) {
+                return $this->respond([
+                    'status' => 'failed',
+                    'messages' => 'username not found!'
+                ]);
+            } else {
+                return $this->respond([
+                    'status' => 'success',
+                    'data' => $cari
                 ]);
             }
         }
@@ -162,12 +191,12 @@ class User_Controller extends ResourceController
     public function deleteUser()
     {
         $datainput = $this->request->getRawInput();
-        if(isset($datainput['id'])) {
+        if (isset($datainput['id'])) {
             $id = $datainput['id'];
 
             $cari = $this->modeluser->getUser($id);
 
-            if($cari == null) {
+            if ($cari == null) {
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found!'
@@ -180,7 +209,6 @@ class User_Controller extends ResourceController
                     'messages' => 'success delete data with id ' . $id
                 ]);
             }
-
         } else {
             return $this->respond([
                 'status' => 'failed',
@@ -188,7 +216,7 @@ class User_Controller extends ResourceController
             ]);
         }
     }
-    
+
 
 
 
@@ -221,17 +249,16 @@ class User_Controller extends ResourceController
     {
         $username      = $this->request->getPost('username');
         $password   = $this->request->getPost('password');
- 
+
         $cek_login = $this->modeluser->cek_login($username);
 
 
         // var_dump($cek_login);
         // die;
- 
+
         // var_dump($cek_login['password']);
- 
-        if(password_verify($password, $cek_login['password']))
-        {
+
+        if (password_verify($password, $cek_login['password'])) {
             $secret_key = $this->privateKey();
             $issuer_claim = "THE_CLAIM"; // this can be the servername. Example: https://domain.com
             $audience_claim = "THE_AUDIENCE";
@@ -252,9 +279,9 @@ class User_Controller extends ResourceController
                     "email" => $cek_login['email']
                 )
             );
- 
+
             $token = JWT::encode($token, $secret_key);
- 
+
             $output = [
                 'status' => 200,
                 'message' => 'Berhasil login',
