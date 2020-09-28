@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'id_user_type' => 1,
-                'username' => 'admin',
+                'username' => 'sekretaris',
                 'name' => 'Sekretaris Sekolah',
                 'email' => 'sekretaris@sekolah.sch.id',
                 'password' => password_hash('Bismillah', PASSWORD_DEFAULT)

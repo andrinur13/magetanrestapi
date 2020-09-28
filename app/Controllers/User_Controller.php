@@ -128,17 +128,12 @@ class User_Controller extends ResourceController
             'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT)
         ];
 
-        if ($this->modeluser->storeUser($datainputan)) {
-            return $this->respondCreated([
-                'status' => 'success',
-                'messages' => 'success add data'
-            ]);
-        } else {
-            return $this->respond([
-                'status' => 'failed',
-                'messages' => 'failed to added data'
-            ]);
-        }
+        $this->modeluser->storeUser($datainputan);
+
+        return $this->respond([
+            'status' => 'success',
+            'messages' => 'success added data'
+        ]);
     }
 
 

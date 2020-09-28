@@ -14,11 +14,6 @@ class UserModel extends Model
     protected $useSoftDeletes = true;
     // protected $builder;
 
-    public function __construct()
-    {
-
-        
-    }
 
     public function getUser($id = null)
     {
