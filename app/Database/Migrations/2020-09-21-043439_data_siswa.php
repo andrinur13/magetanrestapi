@@ -38,6 +38,11 @@ class DataSiswa extends Migration
 			'lulus' => [
 				'type' => 'BOOLEAN'
 			],
+			'ijazah' => [
+				'type' => 'VARCHAR',
+				'constraint' => '256',
+				'null' => TRUE
+			],
 			'created_at' => [
 				'type' => 'DATETIME',
 				'null' => TRUE

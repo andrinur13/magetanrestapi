@@ -82,7 +82,8 @@ class Data_Siswa_Controller extends ResourceController
             'nik' => 'required|min_length[1]|max_length[100]',
             'nama' => 'required',
             'tgl_lahir' => 'valid_date',
-            'alamat' => 'required'
+            'alamat' => 'required',
+            'lulus' => 'required'
         ];
 
         if (!$this->validate($rules)) {
@@ -108,7 +109,8 @@ class Data_Siswa_Controller extends ResourceController
             'nama' => $this->request->getVar('nama'),
             'tgl_lahir' => $this->request->getVar('tgl_lahir'),
             'alamat' => $this->request->getVar('alamat'),
-            'lulus' => $lulus
+            'lulus' => $lulus,
+            'ijazah' => $this->request->getVar('ijazah')
         ];
 
         // insert ke database;
@@ -151,6 +153,7 @@ class Data_Siswa_Controller extends ResourceController
                     'tgl_lahir' => isset($data_input['tgl_lahir']) ? $data_input['tgl_lahir'] : $datayangmaudiedit['tgl_lahir'],
                     'alamat' => isset($data_input['alamat']) ? $data_input['alamat'] : $datayangmaudiedit['alamat'],
                     'lulus' => isset($data_input['lulus']) ? $data_input['lulus'] : $datayangmaudiedit['lulus'],
+                    'ijazah' => isset($data_input['ijazah']) ? $data_input['ijazah'] : $datayangmaudiedit['ijazah']
                 ];
 
                 if($this->modeldatasiswa->updateDataSiswa($datahasiledit, $id)) {

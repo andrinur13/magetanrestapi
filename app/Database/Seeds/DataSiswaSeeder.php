@@ -19,7 +19,8 @@ class DataSiswaSeeder extends Seeder
                 'nama' => $faker->name(),
                 'tgl_lahir' => $faker->date('Y-m-d', '2004-12-31'),
                 'alamat' => $faker->address(),
-                'lulus' => 0
+                'lulus' => 0,
+                'ijazah' => ''
             ];
 
             $this->db->table('data_siswa')->insert($data);

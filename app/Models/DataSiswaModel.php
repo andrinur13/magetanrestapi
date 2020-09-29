@@ -9,7 +9,7 @@ class DataSiswaModel extends Model
     protected $table = 'data_siswa';
     protected $useTimestamps = true;
     protected $primaryKey = 'id_data_siswa';
-    protected $allowedFields = ['id_data_siswa', 'nisn', 'nik', 'nama', 'tgl_lahir', 'alamat', 'lulus'];
+    protected $allowedFields = ['id_data_siswa', 'nisn', 'nik', 'nama', 'tgl_lahir', 'alamat', 'lulus', 'ijazah'];
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
     protected $deletedField  = 'deleted_at';
