@@ -36,7 +36,8 @@ class Prestasi extends Migration
 			],
 			'piagam' => [
 				'type' => 'VARCHAR',
-				'constraint' => 256
+				'constraint' => 256,
+				'null' => TRUE
 			],
 			'created_at' => [
 				'type' => 'DATETIME',

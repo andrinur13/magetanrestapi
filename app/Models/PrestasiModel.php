@@ -29,6 +29,20 @@ class PrestasiModel extends Model
     }
 
 
+    public function getPrestasiDataSiswa($id = false)
+    {
+
+        $db = \Config\Database::connect();
+        $builder = $db->table('prestasi');
+
+        if (!$id) {
+            return null;
+        } else {
+            return $builder->getWhere(['id_data_siswa' => $id])->getResultArray();
+        }
+    }
+
+
     public function storePrestasi($data)
     {
         return $this->insert($data);

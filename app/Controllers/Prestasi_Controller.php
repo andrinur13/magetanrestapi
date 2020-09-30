@@ -72,6 +72,43 @@ class Prestasi_Controller extends ResourceController
 
 
 
+    public function prestasiSiswa()
+    {
+
+
+        $id = $this->request->getVar('id');
+
+        if (!$id) {
+            // cek apabila dikirim lewat body
+            $datainput = $this->request->getRawInput();
+            $id = $datainput['id'];
+        }
+
+
+        if (!$id) {
+            return $this->respond([
+                'status' => 'failed',
+                'messages' => 'provide an id'
+            ]);
+        } else {
+            $cari = $this->modelprestasi->getPrestasiDataSiswa($id);
+
+            if (!$cari) {
+                return $this->respond([
+                    'status' => 'failed',
+                    'messages' => 'id not found!'
+                ]);
+            } else {
+                return $this->respond([
+                    'status' => 'success',
+                    'data' => $cari
+                ]);
+            }
+        }
+    }
+
+
+
     public function create()
     {
         helper('form');
