@@ -24,6 +24,18 @@ class PelanggaranModel extends Model
         }
     }
 
+    public function getPelanggaranDataSiswa($id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table('pelanggaran');
+
+        if (!$id) {
+            return null;
+        } else {
+            return $builder->getWhere(['id_data_siswa' => $id])->getResultArray();
+        }
+    }
+
     public function storePelanggaran($data)
     {
         $this->insert($data);

@@ -52,6 +52,7 @@ $routes->delete('/prestasi', 'Prestasi_Controller::deletePrestasi');
 // pelanggaran
 $routes->get('/pelanggaran', 'Pelanggaran_Controller::index');
 $routes->get('/pelanggaranid', 'Pelanggaran_Controller::pelanggaranid');
+$routes->get('/pelanggaransiswa', 'Pelanggaran_Controller::pelanggaranSiswa');
 $routes->post('/pelanggaran', 'Pelanggaran_Controller::createPelanggaran');
 $routes->put('/pelanggaran', 'Pelanggaran_Controller::editPelanggaran');
 $routes->delete('/pelanggaran', 'Pelanggaran_Controller::deletePelanggaran');

@@ -70,6 +70,40 @@ class Pelanggaran_Controller extends ResourceController
 
 
 
+    public function pelanggaranSiswa()
+    {
+        $id = $this->request->getVar('id_siswa');
+
+        if ($id == null) {
+            $datainput = $this->request->getRawInput();
+            $id = $datainput['id'];
+        }
+
+
+        if (!$id) {
+            return $this->respond([
+                'status' => 'failed',
+                'messages' => 'provide an id!'
+            ]);
+        } else {
+            $cari = $this->modelpelanggaran->getPelanggaranDataSiswa($id);
+
+            if ($cari) {
+                return $this->respond([
+                    'status' => 'success',
+                    'data' => $cari
+                ]);
+            } else {
+                return $this->respond([
+                    'status' => 'failed',
+                    'messages' => 'id ' . $id . ' not found!'
+                ]);
+            }
+        }
+    }
+
+
+
     public function createPelanggaran()
     {
         helper('form');
