@@ -76,7 +76,7 @@ class Pelanggaran_Controller extends ResourceController
 
         $rules = [
             'id_data_siswa' => 'required',
-            'jenis' => 'required|in_list[0, 1, 2, 3]',
+            'jenis' => 'required|in_list[1, 2, 3, 4]',
             'nama_pelanggaran' => 'required',
             'hukuman' => 'required',
         ];
@@ -97,17 +97,12 @@ class Pelanggaran_Controller extends ResourceController
             'hukuman' => $this->request->getVar('hukuman')
         ];
 
-        if ($this->modelpelanggaran->storePelanggaran($datainputan)) {
-            return $this->respondCreated([
-                'status' => 'success',
-                'messages' => 'success add pelanggaran data'
-            ]);
-        } else {
-            return $this->respond([
-                'status' => 'failed',
-                'messages' => 'failed to added data'
-            ]);
-        }
+        $this->modelpelanggaran->storePelanggaran($datainputan);
+
+        return $this->respondCreated([
+            'status' => 'success',
+            'messages' => 'success add data'
+        ]);
     }
 
 
