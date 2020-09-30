@@ -99,7 +99,8 @@ class Prestasi_Controller extends ResourceController
             'tingkat' => $this->request->getVar('tingkat'),
             'penyelenggara' => $this->request->getVar('penyelenggara'),
             'nama_kegiatan' => $this->request->getVar('nama_kegiatan'),
-            'hasil' => $this->request->getVar('hasil')
+            'hasil' => $this->request->getVar('hasil'),
+            'piagam' => $this->request->getVar('piagam')
         ];
 
         if ($this->modelprestasi->storePrestasi($data)) {
@@ -140,7 +141,8 @@ class Prestasi_Controller extends ResourceController
                     'tingkat' => isset($datainput['tingkat']) ? $datainput['tingkat'] : $cari['tingkat'],
                     'penyelenggara' => isset($datainput['penyelenggara']) ? $datainput['penyelenggara'] : $cari['penyelenggara'],
                     'nama_kegiatan' => isset($datainput['nama_kegiatan']) ? $datainput['nama_kegiatan'] : $cari['nama_kegiatan'],
-                    'hasil' => isset($datainput['hasil']) ? $datainput['hasil'] : $cari['hasil']
+                    'hasil' => isset($datainput['hasil']) ? $datainput['hasil'] : $cari['hasil'],
+                    'piagam' => isset($datainput['piagam']) ? $datainput['piagam'] : $cari['piagam']
                 ];
 
                 $this->modelprestasi->updatePrestasi($dataupdate, $id);
