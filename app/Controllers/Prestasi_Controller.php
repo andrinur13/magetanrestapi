@@ -24,12 +24,12 @@ class Prestasi_Controller extends ResourceController
             return $this->respond([
                 'status' => 'success',
                 'data' => $dataprestasi
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'failed get data prestasi'
-            ]);
+            ], 404);
         }
     }
 
@@ -52,7 +52,7 @@ class Prestasi_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
-            ]);
+            ], 400);
         } else {
             $cari = $this->modelprestasi->getPrestasi($id);
 
@@ -60,12 +60,12 @@ class Prestasi_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id not found!'
-                ]);
+                ], 404);
             } else {
                 return $this->respond([
                     'status' => 'success',
                     'data' => $cari
-                ]);
+                ], 200);
             }
         }
     }
@@ -89,7 +89,7 @@ class Prestasi_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
-            ]);
+            ], 400);
         } else {
             $cari = $this->modelprestasi->getPrestasiDataSiswa($id);
 
@@ -97,12 +97,12 @@ class Prestasi_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id not found!'
-                ]);
+                ], 404);
             } else {
                 return $this->respond([
                     'status' => 'success',
                     'data' => $cari
-                ]);
+                ], 200);
             }
         }
     }
@@ -128,7 +128,7 @@ class Prestasi_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'error' => $validasi->getErrors()
-            ]);
+            ], 400);
         }
 
         $data = [
@@ -144,12 +144,12 @@ class Prestasi_Controller extends ResourceController
             return $this->respondCreated([
                 'status' => 'success',
                 'messages' => 'success added data'
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'failed added data'
-            ]);
+            ], 400);
         }
     }
 
@@ -169,7 +169,7 @@ class Prestasi_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found'
-                ]);
+                ], 404);
             } else {
                 // data ditemukan
                 // bisa diedit
@@ -188,13 +188,13 @@ class Prestasi_Controller extends ResourceController
                     'status' => 'success',
                     'messages' => 'id ' . $id . ' was updated',
                     'data' => $dataupdate
-                ]);
+                ], 202);
             }
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'id' => 'provide an id'
-            ]);
+            ], 400);
         }
     }
 
@@ -207,7 +207,7 @@ class Prestasi_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'provide an id'
-            ]);
+            ], 400);
         } else {
             if (isset($datainput['id'])) {
                 $id = $datainput['id'];
@@ -219,20 +219,20 @@ class Prestasi_Controller extends ResourceController
                     return $this->respond([
                         'status' => 'failed',
                         'messages' => 'id ' . $id . ' not found'
-                    ]);
+                    ], 404);
                 } else {
                     // data ada
                     $this->modelprestasi->deletePrestasi($id);
                     return $this->respondDeleted([
                         'status' => 'success',
                         'messages' => 'success deleted data with id ' . $id
-                    ]);
+                    ], 202);
                 }
             } else {
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'provide an id'
-                ]);
+                ], 400);
             }
         }
     }

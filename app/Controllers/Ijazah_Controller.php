@@ -23,12 +23,12 @@ class Ijazah_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'failed get data ijazah'
-            ]);
+            ], 400);
         } else {
             return $this->respond([
                 'status' => 'success',
                 'data' => $cari
-            ]);
+            ], 200);
         }
     }
 
@@ -50,7 +50,7 @@ class Ijazah_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
-            ]);
+            ], 400);
         } else {
             $hasil = $this->modelijazah->getIjazah($id);
 
@@ -58,12 +58,12 @@ class Ijazah_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => $id . ' not found'
-                ]);
+                ], 404);
             } else {
                 return $this->respond([
                     'status' => 'success',
                     'data' => $hasil
-                ]);
+                ], 200);
             }
         }
     }
@@ -83,7 +83,7 @@ class Ijazah_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'errors' => $validation->getErrors()
-            ]);
+            ], 400);
         }
 
         // tampung data inputan
@@ -96,12 +96,12 @@ class Ijazah_Controller extends ResourceController
             return $this->respondCreated([
                 'status' => 'success',
                 'messages' => 'success add data'
-            ]);
+            ], 202);
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'failed to added data'
-            ]);
+            ], 202);
         }
     }
 
@@ -118,7 +118,7 @@ class Ijazah_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found!'
-                ]);
+                ], 404);
             } else {
                 // jika data ditemukan
 
@@ -131,19 +131,19 @@ class Ijazah_Controller extends ResourceController
                     return $this->respondUpdated([
                         'status' => 'success',
                         'messages' => 'success update data'
-                    ]);
+                    ], 202);
                 } else {
                     return $this->respond([
                         'status' => 'failed',
                         'messages' => 'failed to update data'
-                    ]);
+                    ], 202);
                 }
             }
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id!'
-            ]);
+            ], 400);
         }
     }
 
@@ -160,21 +160,21 @@ class Ijazah_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found!'
-                ]);
+                ], 404);
             } else {
                 // delete data with id
                 $this->modelijazah->deleteIjazah($id);
                 return $this->respondDeleted([
                     'status' => 'success',
                     'messages' => 'success delete data with id ' . $id
-                ]);
+                ], 202);
             }
 
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
-            ]);
+            ], 400);
         }
     }
 

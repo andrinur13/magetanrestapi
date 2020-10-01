@@ -53,7 +53,7 @@ class Data_Siswa_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
-            ]);
+            ], 404);
         } else {
             $hasil = $this->modeldatasiswa->getDataSiswa($id);
 
@@ -61,12 +61,12 @@ class Data_Siswa_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => $id . ' not found'
-                ]);
+                ], 404);
             } else {
                 return $this->respond([
                     'status' => 'success',
                     'data' => $hasil
-                ]);
+                ], 200);
             }
         }
     }
@@ -91,7 +91,7 @@ class Data_Siswa_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'errors' => $validation->getErrors()
-            ]);
+            ], 400);
         }
 
         // status kelulusan
@@ -116,13 +116,13 @@ class Data_Siswa_Controller extends ResourceController
         // insert ke database;
         if ($this->modeldatasiswa->storeDataSiswa($dataInputan)) {
             return $this->respondCreated([
-                'status' => 'Berhasil'
-            ]);
+                'status' => 'success'
+            ], 202);
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'data failed to store'
-            ]);
+            ], 400);
         }
     }
 
@@ -143,7 +143,7 @@ class Data_Siswa_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id not found'
-                ]);
+                ], 404);
             } else {
                 // data ditemukan
                 $datahasiledit = [
@@ -161,12 +161,12 @@ class Data_Siswa_Controller extends ResourceController
                         'status' => 'success',
                         'messages' => 'success update data with id' . $id,
                         'data' => $datahasiledit
-                    ]);
+                    ], 202);
                 } else {
                     return $this->respond([
                         'status' => 'failed',
                         'messages' => 'failed update data with id ' . $id
-                    ]);
+                    ], 400);
                 }
             }
         } else {
@@ -174,7 +174,7 @@ class Data_Siswa_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id!'
-            ]);
+            ], 404);
         }
     }
 
@@ -192,7 +192,7 @@ class Data_Siswa_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id!'
-            ]);
+            ], 400);
         } else {
             $cari = $this->modeldatasiswa->getDataSiswa($id);
 
@@ -201,14 +201,14 @@ class Data_Siswa_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id not found ' . $id
-                ]);
+                ], 404);
             } else {
                 // id ditemukan
                 $this->modeldatasiswa->delete($id);
                 return $this->respondDeleted([
                     'status' => 'success',
                     'messages' => 'success deleted with id ' . $id
-                ]);
+                ], 202);
             }
         }
     }

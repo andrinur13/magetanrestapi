@@ -25,12 +25,12 @@ class Pelanggaran_Controller extends ResourceController
             return $this->respond([
                 'status' => 'success',
                 'data' => $cari
-            ]);
+            ], 200);
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'failed to get pelanggaran data'
-            ]);
+            ], 404);
         }
     }
 
@@ -50,7 +50,7 @@ class Pelanggaran_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id!'
-            ]);
+            ], 400);
         } else {
             $cari = $this->modelpelanggaran->getPelanggaran($id);
 
@@ -58,12 +58,12 @@ class Pelanggaran_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'success',
                     'data' => $cari
-                ]);
+                ], 200);
             } else {
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found!'
-                ]);
+                ], 404);
             }
         }
     }
@@ -84,7 +84,7 @@ class Pelanggaran_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id!'
-            ]);
+            ], 400);
         } else {
             $cari = $this->modelpelanggaran->getPelanggaranDataSiswa($id);
 
@@ -92,12 +92,12 @@ class Pelanggaran_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'success',
                     'data' => $cari
-                ]);
+                ], 200);
             } else {
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found!'
-                ]);
+                ], 404);
             }
         }
     }
@@ -120,7 +120,7 @@ class Pelanggaran_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'errors' => $validation->getErrors()
-            ]);
+            ], 400);
         }
 
         // tampung data inputan
@@ -136,7 +136,7 @@ class Pelanggaran_Controller extends ResourceController
         return $this->respondCreated([
             'status' => 'success',
             'messages' => 'success add data'
-        ]);
+        ], 202);
     }
 
 
@@ -153,7 +153,7 @@ class Pelanggaran_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found!'
-                ]);
+                ], 404);
             } else {
                 // jika data ditemukan
 
@@ -168,19 +168,19 @@ class Pelanggaran_Controller extends ResourceController
                     return $this->respondUpdated([
                         'status' => 'success',
                         'messages' => 'success update data'
-                    ]);
+                    ], 202);
                 } else {
                     return $this->respond([
                         'status' => 'failed',
                         'messages' => 'failed to update data'
-                    ]);
+                    ], 400);
                 }
             }
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id!'
-            ]);
+            ], 400);
         }
     }
 
@@ -197,21 +197,21 @@ class Pelanggaran_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found!'
-                ]);
+                ], 404);
             } else {
                 // delete data with id
                 $this->modelpelanggaran->deletePelanggaran($id);
                 return $this->respondDeleted([
                     'status' => 'success',
                     'messages' => 'success delete data with id ' . $id
-                ]);
+                ], 202);
             }
 
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
-            ]);
+            ], 400);
         }
     }
 }

@@ -25,12 +25,12 @@ class User_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'failed get data user'
-            ]);
+            ], 404);
         } else {
             return $this->respond([
                 'status' => 'success',
                 'data' => $cari
-            ]);
+            ], 200);
         }
     }
 
@@ -52,7 +52,7 @@ class User_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
-            ]);
+            ], 400);
         } else {
             $hasil = $this->modeluser->getUser($id);
 
@@ -60,12 +60,12 @@ class User_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => $id . ' not found'
-                ]);
+                ], 404);
             } else {
                 return $this->respond([
                     'status' => 'success',
                     'data' => $hasil
-                ]);
+                ], 200);
             }
         }
     }
@@ -79,7 +79,7 @@ class User_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an username'
-            ]);
+            ], 400);
         } else {
             // jika ada inputan username
             $cari = $this->modeluser->getUsername($username);
@@ -88,12 +88,12 @@ class User_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'username not found!'
-                ]);
+                ], 404);
             } else {
                 return $this->respond([
                     'status' => 'success',
                     'data' => $cari
-                ]);
+                ], 200);
             }
         }
     }
@@ -116,7 +116,7 @@ class User_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'errors' => $validation->getErrors()
-            ]);
+            ], 400);
         }
 
         // tampung data inputan
@@ -133,7 +133,7 @@ class User_Controller extends ResourceController
         return $this->respond([
             'status' => 'success',
             'messages' => 'success added data'
-        ]);
+        ], 202);
     }
 
 
@@ -149,7 +149,7 @@ class User_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found!'
-                ]);
+                ], 404);
             } else {
                 // jika data ditemukan
 
@@ -166,19 +166,19 @@ class User_Controller extends ResourceController
                     return $this->respondUpdated([
                         'status' => 'success',
                         'messages' => 'success update data'
-                    ]);
+                    ], 202);
                 } else {
                     return $this->respond([
                         'status' => 'failed',
                         'messages' => 'failed to update data'
-                    ]);
+                    ], 400);
                 }
             }
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id!'
-            ]);
+            ], 400);
         }
     }
 
@@ -195,20 +195,20 @@ class User_Controller extends ResourceController
                 return $this->respond([
                     'status' => 'failed',
                     'messages' => 'id ' . $id . ' not found!'
-                ]);
+                ], 404);
             } else {
                 // delete data with id
                 $this->modeluser->deleteUser($id);
                 return $this->respondDeleted([
                     'status' => 'success',
                     'messages' => 'success delete data with id ' . $id
-                ]);
+                ], 202);
             }
         } else {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id'
-            ]);
+            ], 400);
         }
     }
 
