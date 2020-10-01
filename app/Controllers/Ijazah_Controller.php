@@ -177,5 +177,17 @@ class Ijazah_Controller extends ResourceController
             ]);
         }
     }
+
+
+    public function cobagetserver()
+    {
+        $authHeader = $this->request->getServer('HTTP_AUTHORIZATION');
+        $authHeader = explode(' ', $authHeader);
+        $authHeader = $authHeader[1];
+
+        return $this->respond([
+            'auth' => $authHeader
+        ]);
+    }
     
 }

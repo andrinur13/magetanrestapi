@@ -294,4 +294,37 @@ class User_Controller extends ResourceController
             return $this->respond($output, 401);
         }
     }
+
+
+    public function logintest()
+    {
+        $username = $this->request->getVar('username');
+        $password = $this->request->getVar('password');
+        $cari = $this->modeluser->getUsername($username);
+
+        if($cari == null) {
+            return $this->respond([
+                'status' => 'failed',
+                'messages' => 'failed to login. user not found!'
+            ]);
+        } else {
+            // cek password
+            if(password_verify($password, $cari[0]['password'])) {
+                $key_data = password_hash(serialize($cari), PASSWORD_DEFAULT);
+                $cocok = password_verify(serialize($cari), $key_data);
+                return $this->respond([
+                    'status' => 'success',
+                    'messages' => 'success login!',
+                    'key' => $key_data
+                ]);
+            } else {
+                return $this->respond([
+                    'status' => 'failed',
+                    'messages' => 'failed to login. wrong password!'
+                ]);
+            }
+        }
+
+        $cari_encrypt = password_hash(serialize($cari), PASSWORD_DEFAULT);
+    }
 }

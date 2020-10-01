@@ -66,6 +66,8 @@ $routes->post('/ijazah', 'Ijazah_Controller::createIjazah');
 $routes->put('/ijazah', 'Ijazah_Controller::editIjazah');
 $routes->delete('/ijazah', 'Ijazah_Controller::deleteIjazah');
 
+$routes->get('/testkey', 'Ijazah_Controller::cobagetserver');
+
 
 // user
 $routes->get('/user', 'User_Controller::index');
@@ -76,7 +78,18 @@ $routes->put('/user', 'User_Controller::editUser');
 $routes->delete('/user', 'User_Controller::deleteUser');
 $routes->post('/login', 'User_Controller::login');
 
+$routes->post('/logintest', 'User_Controller::logintest');
+
 $routes->get('/testing', 'Testing_Controller::index');
+
+
+
+// about us
+$routes->get('/aboutus', 'AboutUs_Controller::index');
+$routes->get('/aboutusid', 'AboutUs_Controller::aboutid');
+$routes->post('/aboutus', 'AboutUs_Controller::createabout');
+$routes->put('/aboutus', 'AboutUs_Controller::editaboutus');
+$routes->delete('/aboutus', 'AboutUs_Controller::deleteabout');
 
 /**
  * --------------------------------------------------------------------
