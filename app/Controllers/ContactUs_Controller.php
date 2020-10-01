@@ -3,21 +3,22 @@
 namespace App\Controllers;
 
 use App\Models\AboutUsModel;
+use App\Models\ContactUsModel;
 use CodeIgniter\RESTful\ResourceController;
 
-class AboutUs_Controller extends ResourceController
+class ContactUs_Controller extends ResourceController
 {
 
-    protected $modelaboutus;
+    protected $modelcontactus;
 
     public function __construct()
     {
-        $this->modelaboutus = new AboutUsModel();
+        $this->modelcontactus = new ContactUsModel();
     }
 
     public function index()
     {
-        $cari = $this->modelaboutus->getData();
+        $cari = $this->modelcontactus->getData();
 
         if ($cari != null) {
             return $this->respond([
@@ -34,7 +35,7 @@ class AboutUs_Controller extends ResourceController
 
 
 
-    public function aboutid()
+    public function contactusid()
     {
         $id = $this->request->getVar('id');
 
@@ -52,7 +53,7 @@ class AboutUs_Controller extends ResourceController
         }
 
         // id ada
-        $cari = $this->modelaboutus->getData($id);
+        $cari = $this->modelcontactus->getData($id);
 
         if ($cari == null) {
             return $this->respond([
@@ -69,7 +70,7 @@ class AboutUs_Controller extends ResourceController
 
 
 
-    public function createabout()
+    public function createcontactus()
     {
         helper('form');
 
@@ -96,7 +97,7 @@ class AboutUs_Controller extends ResourceController
             'messages' => $this->request->getPost('messages'),
         ];
 
-        $this->modelaboutus->storeData($datainputan);
+        $this->modelcontactus->storeData($datainputan);
 
         return $this->respond([
             'status' => 'success',
@@ -105,7 +106,7 @@ class AboutUs_Controller extends ResourceController
     }
 
 
-    public function editaboutus()
+    public function editcontactus()
     {
         $datainput = $this->request->getRawInput();
 
@@ -113,7 +114,7 @@ class AboutUs_Controller extends ResourceController
             // ada data input yang masuk
             $id = $datainput['id'];
 
-            $cari = $this->modelaboutus->getData($id);
+            $cari = $this->modelcontactus->getData($id);
 
             if (!$cari) {
                 return $this->respond([
@@ -130,7 +131,7 @@ class AboutUs_Controller extends ResourceController
                     'messages' => isset($datainput['messages']) ? $datainput['messages'] : $cari['messages'],
                 ];
 
-                $this->modelaboutus->updateData($dataupdate, $id);
+                $this->modelcontactus->updateData($dataupdate, $id);
 
                 return $this->respondUpdated([
                     'status' => 'success',
@@ -147,7 +148,7 @@ class AboutUs_Controller extends ResourceController
     }
 
 
-    public function deleteabout()
+    public function deletecontactus()
     {
         $datainput = $this->request->getRawInput();
 
@@ -161,7 +162,7 @@ class AboutUs_Controller extends ResourceController
                 $id = $datainput['id'];
 
                 // delete db with id
-                $cari = $this->modelaboutus->getData($id);
+                $cari = $this->modelcontactus->getData($id);
 
                 if (!$cari) {
                     return $this->respond([
@@ -170,7 +171,7 @@ class AboutUs_Controller extends ResourceController
                     ], 404);
                 } else {
                     // data ada
-                    $this->modelaboutus->deleteData($id);
+                    $this->modelcontactus->deleteData($id);
                     return $this->respondDeleted([
                         'status' => 'success',
                         'messages' => 'success deleted data with id ' . $id

@@ -4,7 +4,7 @@ namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
 
-class AboutUsSeeder extends Seeder
+class ContactUsSeeder extends Seeder
 {
 
     public function run()
@@ -20,7 +20,7 @@ class AboutUsSeeder extends Seeder
                 'messages' => $faker->paragraph()
             ];
 
-            $this->db->table('about_us')->insert($data);
+            $this->db->table('contact_us')->insert($data);
         }
     }
 

@@ -85,11 +85,11 @@ $routes->get('/testing', 'Testing_Controller::index');
 
 
 // about us
-$routes->get('/aboutus', 'AboutUs_Controller::index');
-$routes->get('/aboutusid', 'AboutUs_Controller::aboutid');
-$routes->post('/aboutus', 'AboutUs_Controller::createabout');
-$routes->put('/aboutus', 'AboutUs_Controller::editaboutus');
-$routes->delete('/aboutus', 'AboutUs_Controller::deleteabout');
+$routes->get('/contactus', 'ContactUs_Controller::index');
+$routes->get('/contactusid', 'ContactUs_Controller::contactusid');
+$routes->post('/contactus', 'ContactUs_Controller::createcontactus');
+$routes->put('/contactus', 'ContactUs_Controller::editcontactus');
+$routes->delete('/contactus', 'ContactUs_Controller::deletecontactus');
 
 /**
  * --------------------------------------------------------------------

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AboutUsModel extends Model
+class ContactUsModel extends Model
 {
-    protected $table = 'about_us';
+    protected $table = 'contact_us';
     protected $useTimestamps = true;
     protected $primaryKey = 'id';
     protected $allowedFields = ['name', 'email', 'subject', 'messages'];
