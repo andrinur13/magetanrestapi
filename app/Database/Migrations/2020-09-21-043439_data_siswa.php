@@ -28,6 +28,10 @@ class DataSiswa extends Migration
 				'type' => 'VARCHAR',
 				'constraint' => '128'
 			],
+			'kelas' => [
+				'type' => 'VARCHAR',
+				'constraint' => '64'
+			],
 			'tgl_lahir' => [
 				'type' => 'DATE',
 			],
