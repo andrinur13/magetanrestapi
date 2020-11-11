@@ -81,6 +81,9 @@ class Data_Siswa_Controller extends ResourceController
             'nisn' => 'required|min_length[1]|max_length[100]',
             'nik' => 'required|min_length[1]|max_length[100]',
             'nama' => 'required',
+            'kelas' => 'required',
+            'jurusan' => 'required',
+            'tahun_lulus' => 'required',
             'tgl_lahir' => 'valid_date',
             'alamat' => 'required',
             'lulus' => 'required'
@@ -107,9 +110,13 @@ class Data_Siswa_Controller extends ResourceController
             'nisn' => $this->request->getVar('nisn'),
             'nik' => $this->request->getVar('nik'),
             'nama' => $this->request->getVar('nama'),
+            'kelas' => $this->request->getVar('kelas'),
+            'jurusan' => $this->request->getVar('jurusan'),
+            'tahun_lulus' => $this->request->getVar('tahun_lulus'),
             'tgl_lahir' => $this->request->getVar('tgl_lahir'),
             'alamat' => $this->request->getVar('alamat'),
             'lulus' => $lulus,
+            'skhu' => $this->request->getVar('skhu'),
             'ijazah' => $this->request->getVar('ijazah')
         ];
 
@@ -150,9 +157,13 @@ class Data_Siswa_Controller extends ResourceController
                     'nisn' => isset($data_input['nik']) ? $data_input['nik']: $datayangmaudiedit['nik'],
                     'nik' => isset($data_input['nik']) ? $data_input['nik'] : $datayangmaudiedit['nik'],
                     'nama' => isset($data_input['nama']) ? $data_input['nama'] : $datayangmaudiedit['nama'],
+                    'kelas' => isset($data_input['kelas']) ? $data_input['kelas'] : $datayangmaudiedit['kelas'],
+                    'jurusan' => isset($data_input['jurusan']) ? $data_input['jurusan'] : $datayangmaudiedit['jurusan'],
+                    'tahun_lulus' => isset($data_input['tahun_lulus']) ? $data_input['tahun_lulus'] : $datayangmaudiedit['tahun_lulus'],
                     'tgl_lahir' => isset($data_input['tgl_lahir']) ? $data_input['tgl_lahir'] : $datayangmaudiedit['tgl_lahir'],
                     'alamat' => isset($data_input['alamat']) ? $data_input['alamat'] : $datayangmaudiedit['alamat'],
                     'lulus' => isset($data_input['lulus']) ? $data_input['lulus'] : $datayangmaudiedit['lulus'],
+                    'skhu' => isset($data_input['skhu']) ? $data_input['skhu'] : $datayangmaudiedit['skhu'],
                     'ijazah' => isset($data_input['ijazah']) ? $data_input['ijazah'] : $datayangmaudiedit['ijazah']
                 ];
 
