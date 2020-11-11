@@ -5,6 +5,8 @@ namespace App\Controllers;
 use App\Models\DataSiswaModel;
 use CodeIgniter\RESTful\ResourceController;
 
+use function PHPSTORM_META\type;
+
 class Data_Siswa_Controller extends ResourceController
 {
     protected $format = 'json';
@@ -71,6 +73,31 @@ class Data_Siswa_Controller extends ResourceController
         }
     }
 
+
+    public function statistiksiswa()
+    {
+        $siswa = $this->modeldatasiswa->getDataSiswa();
+
+        if(!$siswa) {
+            return $this->respond([
+                'status' => 'failed',
+                'messages' => 'siswa not found!'
+            ], 404);
+        } else {
+            $tahunlulus = [];
+
+            for($i=0; $i<count($siswa); $i++) {
+                $tahunlulus[] = $siswa[$i]['tahun_lulus'];
+            }
+
+            $tahun_result = array_count_values($tahunlulus);
+
+            return $this->respond([
+                'status' => 'success',
+                'data' => $tahun_result
+            ]);
+        }
+    }
 
     
     public function create()

@@ -36,6 +36,7 @@ $routes->get('/', 'Home::index');
 // data siswa
 $routes->get('/siswaid', 'Data_Siswa_Controller::siswaid');
 $routes->get('/siswa', 'Data_Siswa_Controller::index');
+$routes->get('/statistiksiswa', 'Data_Siswa_Controller::statistiksiswa');
 $routes->post('/siswa', 'Data_Siswa_Controller::create');
 $routes->put('/siswa', 'Data_Siswa_Controller::editsiswa');
 $routes->delete('/siswa', 'Data_Siswa_Controller::deleteSiswa');
