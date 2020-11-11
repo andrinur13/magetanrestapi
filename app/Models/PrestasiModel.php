@@ -10,7 +10,7 @@ class PrestasiModel extends Model
     protected $table = 'prestasi';
     protected $useTimestamps = true;
     protected $primaryKey = 'id_prestasi';
-    protected $allowedFields = ['id_data_siswa', 'tingkat', 'penyelenggara', 'nama_kegiatan', 'hasil', 'piagam'];
+    protected $allowedFields = ['id_data_siswa', 'tingkat', 'penyelenggara', 'nama_kegiatan', 'hasil', 'tgl_kegiatan', 'foto_kegiatan', 'piagam'];
     protected $useSoftDeletes = true;
 
     

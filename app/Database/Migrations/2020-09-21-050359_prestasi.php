@@ -30,9 +30,16 @@ class Prestasi extends Migration
 				'type' => 'VARCHAR',
 				'constraint' => 256
 			],
+			'tgl_kegiatan' => [
+				'type' => 'DATE'
+			],
 			'hasil' => [
 				'type' => 'VARCHAR',
 				'constraint' => 256
+			],
+			'foto_kegiatan' => [
+				'type' => 'VARCHAR',
+				'constraint' => 128
 			],
 			'piagam' => [
 				'type' => 'VARCHAR',

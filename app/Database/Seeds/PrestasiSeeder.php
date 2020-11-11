@@ -18,6 +18,8 @@ class PrestasiSeeder extends Seeder
                 'penyelenggara' => 'Kementrian Riset Teknologi dan Pendidikan Tinggi',
                 'nama_kegiatan' => 'Hackathon Covid-19 Apps',
                 'hasil' => 'Juara 2',
+                'tgl_kegiatan' => '2019-06-03',
+                'foto_kegiatan' => '001244342.jpg',
                 'piagam' => ''
             ],
             [
@@ -26,6 +28,8 @@ class PrestasiSeeder extends Seeder
                 'penyelenggara' => 'Wuhan University',
                 'nama_kegiatan' => 'Robotic Contest',
                 'hasil' => 'Juara Harapan 1',
+                'tgl_kegiatan' => '2019-05-01',
+                'foto_kegiatan' => '001243553.jpg',
                 'piagam' => ''
             ]
         ];
