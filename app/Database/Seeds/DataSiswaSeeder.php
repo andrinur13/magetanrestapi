@@ -11,15 +11,19 @@ class DataSiswaSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
-        for($i = 0; $i < 100; $i++)
+        for($i = 0; $i < 30; $i++)
         {
             $data = [
                 'nisn' => $faker->randomNumber(6),
                 'nik' => $faker->randomNumber(9),
                 'nama' => $faker->name(),
+                'kelas' => $faker->random_int(10, 12),
+                'jurusan' => $faker->randomElement(['IPA, IPS']),
+                'tahun_lulus' => $faker->randomElement('2017', '2018', '2019'),
                 'tgl_lahir' => $faker->date('Y-m-d', '2004-12-31'),
                 'alamat' => $faker->address(),
                 'lulus' => 0,
+                'skhu' => 'skhu.pdf',
                 'ijazah' => ''
             ];
 

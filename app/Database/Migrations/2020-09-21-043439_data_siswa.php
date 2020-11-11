@@ -50,6 +50,10 @@ class DataSiswa extends Migration
 			'lulus' => [
 				'type' => 'BOOLEAN'
 			],
+			'skhu' => [
+				'type' => 'VARCHAR',
+				'constraint' => '256'
+			],
 			'ijazah' => [
 				'type' => 'VARCHAR',
 				'constraint' => '256',
