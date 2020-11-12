@@ -28,6 +28,10 @@ class DataSiswa extends Migration
 				'type' => 'VARCHAR',
 				'constraint' => '128'
 			],
+			'jenis_kelamin' => [
+				'type' => 'ENUM',
+				'constraint' => "'LAKI-LAKI', 'PEREMPUAN'" 
+			],
 			'kelas' => [
 				'type' => 'VARCHAR',
 				'constraint' => '64'

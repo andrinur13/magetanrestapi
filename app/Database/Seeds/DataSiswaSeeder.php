@@ -17,6 +17,7 @@ class DataSiswaSeeder extends Seeder
                 'nisn' => $faker->randomNumber(6),
                 'nik' => $faker->randomNumber(9),
                 'nama' => $faker->name(),
+                'jenis_kelamin' => $faker->randomElement(['1', '2']),
                 'kelas' => $faker->randomElement(['10', '11', '12']),
                 'jurusan' => $faker->randomElement(['IPA', 'IPS']),
                 'tahun_lulus' => $faker->randomElement(['2017', '2018', '2019']),

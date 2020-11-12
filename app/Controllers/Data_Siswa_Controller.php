@@ -84,17 +84,48 @@ class Data_Siswa_Controller extends ResourceController
                 'messages' => 'siswa not found!'
             ], 404);
         } else {
-            $tahunlulus = [];
 
+            $tahunlulus = [];
+            $gender = [];
             for($i=0; $i<count($siswa); $i++) {
                 $tahunlulus[] = $siswa[$i]['tahun_lulus'];
+                $gender[] = $siswa[$i]['jenis_kelamin'];
             }
 
-            $tahun_result = array_count_values($tahunlulus);
+            $tahunlulus_count = array_count_values($tahunlulus);
+            $gender_count = array_count_values($gender);
 
+
+            // tahun lulus
+            $tahunlulus_final = [];
+            foreach($tahunlulus_count as $tc => $val) {
+                $temp = [
+                    'tahun' => $tc,
+                    'value' => $val
+                ];
+
+                array_push($tahunlulus_final, $temp);
+            }
+
+
+            // gender
+            $gender_final = [];
+            foreach ($gender_count as $gc => $val) {
+                $temp = [
+                    'tahun' => $gc,
+                    'value' => $val
+                ];
+
+                array_push($gender_final, $temp);
+            }
+
+        
             return $this->respond([
                 'status' => 'success',
-                'data' => $tahun_result
+                'data' => [
+                    'tahun' => $tahunlulus_final,
+                    'gender' => $gender_final
+                ]
             ]);
         }
     }
