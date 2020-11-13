@@ -109,6 +109,63 @@ class Prestasi_Controller extends ResourceController
 
 
 
+    public function statistikprestasi()
+    {
+        $prestasi = $this->modelprestasi->getPrestasi();
+
+        if(!$prestasi) {
+            return $this->respond([
+                'status' => 'failed',
+                'messages' => 'data not found!'
+            ], 404);
+        } else {
+            // data ada
+             $tingkat = [[]];
+             $tahun = [];
+
+            //  dd(date('Y', strtotime($prestasi[0]['tgl_kegiatan'])));
+
+             for($i=0; $i<count($prestasi); $i++) {
+                 $tingkat[$i][0] = $prestasi[$i]['tingkat'];
+                 $tingkat[$i][1] = date('Y', strtotime($prestasi[$i]['tgl_kegiatan']));
+
+                 $tahun[] = date('Y', strtotime($prestasi[$i]['tgl_kegiatan']));
+             }
+
+             $tahun = array_unique($tahun);
+             sort($tahun);
+
+             $prestasi_final = [];
+
+             foreach ($tahun as $th => $value) {
+
+                $temp = [];
+
+                $j = 0;
+                for($i=0; $i<count($tingkat); $i++) {
+                    if($tingkat[$i][1] == $value) {
+                        $j += 1;
+                    }
+                    
+                }
+                
+                $prestasi_final[$value] = $j;
+             }
+
+             unset($prestasi_final[0]);
+
+            //  dd($prestasi_final);
+
+             return $this->respond([
+                 'status' => 'success',
+                 'data' => $prestasi_final
+             ], 200);
+            
+            }
+    }
+
+
+
     public function create()
     {
         helper('form');

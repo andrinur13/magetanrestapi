@@ -45,6 +45,7 @@ $routes->delete('/siswa', 'Data_Siswa_Controller::deleteSiswa');
 // prestasi
 $routes->get('/prestasi', 'Prestasi_Controller::index');
 $routes->get('/prestasiid', 'Prestasi_Controller::prestasiid');
+$routes->get('/statistikprestasi', 'Prestasi_Controller::statistikprestasi');
 $routes->post('/prestasi', 'Prestasi_Controller::create');
 $routes->put('/prestasi', 'Prestasi_Controller::editPrestasi');
 $routes->delete('/prestasi', 'Prestasi_Controller::deletePrestasi');
