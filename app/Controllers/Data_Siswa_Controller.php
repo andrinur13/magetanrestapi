@@ -261,7 +261,7 @@ class Data_Siswa_Controller extends ResourceController
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'provide an id!'
-            ], 400);
+            ], 400); 
         } else {
             $cari = $this->modeldatasiswa->getDataSiswa($id);
 
