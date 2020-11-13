@@ -113,55 +113,85 @@ class Prestasi_Controller extends ResourceController
     {
         $prestasi = $this->modelprestasi->getPrestasi();
 
-        if(!$prestasi) {
+        if (!$prestasi) {
             return $this->respond([
                 'status' => 'failed',
                 'messages' => 'data not found!'
             ], 404);
         } else {
             // data ada
-             $tingkat = [[]];
-             $tahun = [];
+            $tingkat = [[]];
+            $tahun = [];
 
             //  dd(date('Y', strtotime($prestasi[0]['tgl_kegiatan'])));
 
-             for($i=0; $i<count($prestasi); $i++) {
-                 $tingkat[$i][0] = $prestasi[$i]['tingkat'];
-                 $tingkat[$i][1] = date('Y', strtotime($prestasi[$i]['tgl_kegiatan']));
+            for ($i = 0; $i < count($prestasi); $i++) {
+                $tingkat[$i][0] = $prestasi[$i]['tingkat'];
+                $tingkat[$i][1] = date('Y', strtotime($prestasi[$i]['tgl_kegiatan']));
 
-                 $tahun[] = date('Y', strtotime($prestasi[$i]['tgl_kegiatan']));
-             }
-
-             $tahun = array_unique($tahun);
-             sort($tahun);
-
-             $prestasi_final = [];
-
-             foreach ($tahun as $th => $value) {
-
-                $temp = [];
-
-                $j = 0;
-                for($i=0; $i<count($tingkat); $i++) {
-                    if($tingkat[$i][1] == $value) {
-                        $j += 1;
-                    }
-                    
-                }
-                
-                $prestasi_final[$value] = $j;
-             }
-
-             unset($prestasi_final[0]);
-
-            //  dd($prestasi_final);
-
-             return $this->respond([
-                 'status' => 'success',
-                 'data' => $prestasi_final
-             ], 200);
-            
+                $tahun[] = date('Y', strtotime($prestasi[$i]['tgl_kegiatan']));
             }
+
+            $tahun = array_unique($tahun);
+            sort($tahun);
+
+            $prestasi_final = [];
+
+            foreach ($tahun as $th => $value) {
+
+
+                $desa = 0;
+                $kecamatan = 0;
+                $kabupaten = 0;
+                $provinsi = 0;
+                $nasional = 0;
+                $internasional = 0;
+
+                for ($i = 0; $i < count($tingkat); $i++) {
+
+
+                    if ($tingkat[$i][1] == $value) {
+                        if ($tingkat[$i][0] == 'DESA') {
+                            $desa += 1;
+                        } else if ($tingkat[$i][0] == 'KECAMATAN') {
+                            $kecamatan += 1;
+                        } else if ($tingkat[$i][0] == 'KABUPATEN') {
+                            $kabupaten += 1;
+                        } else if ($tingkat[$i][0] == 'PROVINSI') {
+                            $provinsi += 1;
+                        } else if ($tingkat[$i][0] == 'NASIONAL') {
+                            $nasional += 1;
+                        } else if ($tingkat[$i][0] == 'INTERNASIONAL') {
+                            $internasional += 1;
+                        }
+                    }
+                }
+
+                $temp2 = [
+                    'DESA' => $desa,
+                    'KECAMATAN' => $kecamatan,
+                    'KABUPATEN' => $kabupaten,
+                    'PROVINSI' => $provinsi,
+                    'NASIONAL' => $nasional,
+                    'INTERNASIONAL' => $internasional
+                ];
+
+                $temp3 = [
+                    'TAHUN' => $value,
+                    'PRESTASI' => $temp2
+                ];
+
+                array_push($prestasi_final, $temp3);
+            }
+
+
+            // dd($prestasi_final);
+
+            return $this->respond([
+                'status' => 'success',
+                'data' => $prestasi_final
+            ], 200);
+        }
     }
 
 
