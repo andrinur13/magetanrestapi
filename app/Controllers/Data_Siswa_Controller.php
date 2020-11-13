@@ -107,6 +107,7 @@ class Data_Siswa_Controller extends ResourceController
                 array_push($tahunlulus_final, $temp);
             }
 
+            array_multisort($tahunlulus_final);
 
             // gender
             $gender_final = [];
@@ -118,7 +119,6 @@ class Data_Siswa_Controller extends ResourceController
 
                 array_push($gender_final, $temp);
             }
-
         
             return $this->respond([
                 'status' => 'success',
